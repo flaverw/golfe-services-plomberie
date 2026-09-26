@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://golfe-services-plomberie.fr/sitemap.xml

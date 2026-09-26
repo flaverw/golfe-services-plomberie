@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" fill="none" role="img" aria-label="Golfe Services Plomberie">
+  <circle cx="60" cy="60" r="56" stroke="#c6a15f" stroke-width="1.6"/>
+  <circle cx="60" cy="60" r="49.5" stroke="#c6a15f" stroke-width="0.9" opacity=".5"/>
+  <path d="M60 35 C64 47 70 52 70 59 a10 10 0 1 1 -20 0 c0-7 6-12 10-24 Z" fill="#c6a15f"/>
+  <path d="M42 77 Q51 72 60 77 T78 77" stroke="#c6a15f" stroke-width="1.7" stroke-linecap="round"/>
+  <path d="M46 84 Q54 80.5 62 84 T78 84" stroke="#c6a15f" stroke-width="1.2" opacity=".55" stroke-linecap="round"/>
+</svg>

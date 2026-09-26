@@ -1,0 +1,5 @@
+<svg viewBox="0 0 300 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="100" rx="8" fill="#fff"/>
+  <path d="M45 20c-7 9-11 18-14 30-2 4-4 5-9 3l-1 5c4 2 9 3 14 0 5-5 8-10 12-15 3-7 6-12 10-15 7-5 12-7 16-5l-1-5c-7-2-14-1-19 3-2 2-4 6-8 14zm11 23c-3 6-2 12 1 18 2 5 7 7 12 7 7-1 10-5 12-10l-1-6c-3 5-7 6-11 6s-8-3-9-11c0-7 2-12 6-15l-2-6c-5 3-8 9-8 17z" fill="#C22127"/>
+  <text x="145" y="68" font-family="Georgia,serif" font-weight="700" font-size="30" fill="#C22127" text-anchor="middle" letter-spacing="1">Generali</text>
+</svg>
