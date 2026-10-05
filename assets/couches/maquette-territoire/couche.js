@@ -993,4 +993,13 @@ async function construire3D(racine, cfg, ui) {
   return { activer, duree: (i) => dureeEnvoi(cables[i] ? cables[i].long / 1.4 : 4) };
 }
 
-document.querySelectorAll(SEL).forEach(init);
+// Initialisation paresseuse : on ne charge Three.js et on ne construit la scène qu'à
+// l'approche du viewport (évite ~212 Ko de JS et une tâche longue au chargement de la page).
+if ('IntersectionObserver' in window) {
+  const amorce = new IntersectionObserver((entrees, obs) => {
+    for (const e of entrees) { if (e.isIntersecting) { obs.unobserve(e.target); init(e.target); } }
+  }, { rootMargin: '600px' });
+  document.querySelectorAll(SEL).forEach((el) => amorce.observe(el));
+} else {
+  document.querySelectorAll(SEL).forEach(init);
+}
