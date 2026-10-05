@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://golfe-services-plomberie.fr/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
-  <url><loc>https://golfe-services-plomberie.fr/urgence.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://golfe-services-plomberie.fr/mentions-legales.html</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
   <url><loc>https://golfe-services-plomberie.fr/confidentialite.html</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
+  <url><loc>https://golfe-services-plomberie.fr/accessibilite.html</loc><priority>0.2</priority><changefreq>yearly</changefreq></url>
 </urlset>

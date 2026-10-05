@@ -1,0 +1,38 @@
+<!-- Couche « Maquette du territoire « Où êtes-vous ? » (pays ou secteur) » (maquette-territoire) — à coller dans la page -->
+<link rel="stylesheet" href="assets/couches/maquette-territoire/couche.css">
+<section class="c-maquette-territoire" data-echelle="pays" data-trace="assets/couches/maquette-territoire/media/france.json" aria-label="Où nous travaillons">
+  <div class="mt-cadre">
+    <div class="mt-scene" aria-hidden="true">
+      <div class="mt-repli"></div>
+      <canvas class="mt-toile"></canvas>
+      <div class="mt-etiquettes"></div>
+    </div>
+    <div class="mt-panneau">
+      <p class="mt-legende" id="mt-bases-pays">Nos points d’attache</p>
+      <ul class="mt-bases" role="list" aria-labelledby="mt-bases-pays">
+        <li class="mt-base" data-base data-lat="50.2775" data-lon="3.9734" data-dit="l’Avesnois (Maubeuge)"><span class="mt-base-nom">Maubeuge</span> <span class="mt-base-role">Avesnois</span></li>
+        <li class="mt-base" data-base data-lat="43.0939" data-lon="5.8394" data-dit="le Var (Six-Fours-les-Plages)"><span class="mt-base-nom">Six-Fours-les-Plages</span> <span class="mt-base-role">Var</span></li>
+      </ul>
+      <p class="mt-legende" id="mt-villes-pays">Choisissez une ville&nbsp;:</p>
+      <ul class="mt-liste" role="list" aria-labelledby="mt-villes-pays">
+        <li><button class="mt-lieu" type="button" aria-pressed="false" data-lat="50.6292" data-lon="3.0573">Lille</button></li>
+        <li><button class="mt-lieu" type="button" aria-pressed="false" data-lat="48.8566" data-lon="2.3522">Paris</button></li>
+        <li><button class="mt-lieu" type="button" aria-pressed="false" data-lat="48.5734" data-lon="7.7521">Strasbourg</button></li>
+        <li><button class="mt-lieu" type="button" aria-pressed="false" data-lat="48.1173" data-lon="-1.6778">Rennes</button></li>
+        <li><button class="mt-lieu" type="button" aria-pressed="false" data-lat="47.2184" data-lon="-1.5536">Nantes</button></li>
+        <li><button class="mt-lieu" type="button" aria-pressed="false" data-lat="45.7640" data-lon="4.8357">Lyon</button></li>
+        <li><button class="mt-lieu" type="button" aria-pressed="false" data-lat="45.7772" data-lon="3.0870">Clermont-Ferrand</button></li>
+        <li><button class="mt-lieu" type="button" aria-pressed="false" data-lat="44.8378" data-lon="-0.5792">Bordeaux</button></li>
+        <li><button class="mt-lieu" type="button" aria-pressed="false" data-lat="43.6047" data-lon="1.4442">Toulouse</button></li>
+        <li><button class="mt-lieu" type="button" aria-pressed="false" data-lat="43.6108" data-lon="3.8767">Montpellier</button></li>
+        <li><button class="mt-lieu" type="button" aria-pressed="false" data-lat="43.2965" data-lon="5.3698">Marseille</button></li>
+        <li><button class="mt-lieu" type="button" aria-pressed="false" data-lat="43.7102" data-lon="7.2620">Nice</button></li>
+        <li><button class="mt-lieu" type="button" aria-pressed="false" data-lat="41.9192" data-lon="8.7386">Ajaccio</button></li>
+      </ul>
+      <p class="mt-phrase">Nous travaillons en visio partout en France&#8239;; nos deux points d’attache&nbsp;: l’Avesnois et le Var.</p>
+      <p class="mt-annonce" aria-live="polite"></p>
+      <p class="mt-note">Tracé Natural Earth (domaine public), simplifié, France métropolitaine. Relief d’illustration, inspiré des grands massifs. Distances à vol d’oiseau&nbsp;: ce n’est pas un temps de trajet.</p>
+    </div>
+  </div>
+</section>
+<script type="module" src="assets/couches/maquette-territoire/couche.js" defer></script>

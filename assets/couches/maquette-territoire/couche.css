@@ -1,0 +1,134 @@
+/* style:debut */
+.c-maquette-territoire{
+  --fond:#f4f0e8;
+  --surface:#ffffff;
+  --encre:#17222c;
+  --encre-douce:#596570;
+  --accent:#0e7c74;
+  --sur-accent:#ffffff;
+  --signal:#13a79a;
+  --focus:#0e7c74;
+  --police-titre:'Anybody',system-ui,sans-serif;
+  --police-texte:'Atkinson',system-ui,sans-serif;
+  --police-repere:'Space Mono',ui-monospace,monospace;
+  --accent-2:#4f9fb8;
+}
+/* style:fin */
+
+/* ---------- socle ---------- */
+.c-maquette-territoire{container-type:inline-size; color:var(--encre); font-family:var(--police-texte); line-height:1.5}
+.c-maquette-territoire *,.c-maquette-territoire *::before{box-sizing:border-box}
+.c-maquette-territoire .mt-cadre{position:relative; display:grid; gap:14px}
+
+/* ---------- la maquette : toile WebGL transparente sur un fond de table (CSS) ---------- */
+.c-maquette-territoire .mt-scene{
+  position:relative; overflow:hidden; border-radius:18px;
+  height:clamp(330px,96cqi,540px);
+  background:
+    radial-gradient(62% 58% at 40% 48%, color-mix(in srgb,var(--surface),var(--encre) 6%) 0, transparent 74%),
+    radial-gradient(130% 110% at 50% 105%, color-mix(in srgb,var(--fond) 86%,#000) 0, var(--fond) 62%);
+}
+.c-maquette-territoire .mt-repli{
+  position:absolute; inset:0;
+  background:url(media/repli.webp) 50% 50%/contain no-repeat;
+  opacity:0; animation:c-maquette-territoire-repli 600ms ease-out 1400ms forwards;
+}
+.c-maquette-territoire[data-echelle="secteur"] .mt-repli{background-image:url(media/repli-secteur.webp)}
+@keyframes c-maquette-territoire-repli{to{opacity:1}}
+/* Le module a démarré : repli caché ; sans WebGL ou contexte perdu : repli tout de suite. */
+.c-maquette-territoire.est-attente .mt-repli,.c-maquette-territoire.est-3d .mt-repli{animation:none; opacity:0}
+.c-maquette-territoire.est-repli .mt-repli{animation:none; opacity:1}
+.c-maquette-territoire .mt-toile{position:absolute; inset:0; width:100%; height:100%; display:block; opacity:0; transition:opacity 700ms cubic-bezier(.2,.7,.1,1)}
+.c-maquette-territoire.est-3d .mt-toile{opacity:1}
+.c-maquette-territoire.est-repli .mt-toile,.c-maquette-territoire.est-repli .mt-etiquettes{opacity:0; visibility:hidden}
+.c-maquette-territoire .mt-scene.est-survol{cursor:pointer}
+
+/* ---------- étiquettes HTML posées sur la maquette (la liste reste l'interface) ---------- */
+.c-maquette-territoire .mt-etiquettes{position:absolute; inset:0; pointer-events:none; z-index:1}
+.c-maquette-territoire .mt-etiquette{
+  position:absolute; left:0; top:0; display:inline-flex; align-items:center; gap:6px;
+  padding:3px 10px 4px; border-radius:999px; white-space:nowrap; pointer-events:none; cursor:pointer;
+  font:600 13px/1.2 var(--police-texte); color:var(--encre);
+  background:color-mix(in srgb,var(--surface) 94%,transparent);
+  border:1px solid color-mix(in srgb,var(--encre) 20%,transparent);
+  box-shadow:0 6px 16px -8px color-mix(in srgb,#000 70%,transparent);
+  opacity:0; visibility:hidden; transition:opacity 280ms ease-out, visibility 0s 280ms, border-color 200ms, box-shadow 200ms;
+}
+.c-maquette-territoire .mt-etiquette.est-visible{opacity:1; visibility:visible; pointer-events:auto; transition:opacity 280ms ease-out, visibility 0s, border-color 200ms, box-shadow 200ms}
+.c-maquette-territoire .mt-fil{
+  position:absolute; left:0; top:0; width:1px; height:1px; transform-origin:0 50%; pointer-events:none;
+  background:color-mix(in srgb,var(--encre) 55%,transparent); opacity:0; transition:opacity 200ms;
+}
+.c-maquette-territoire .mt-fil.est-visible{opacity:1}
+.c-maquette-territoire .mt-etiquette.est-base{background:var(--encre); color:var(--fond); border-color:var(--encre); font-weight:700; pointer-events:none; cursor:default}
+.c-maquette-territoire .mt-e-role{font:700 9.5px/1 var(--police-repere); letter-spacing:.08em; text-transform:uppercase}
+.c-maquette-territoire .mt-etiquette.est-base::before{width:7px; height:7px; background:var(--accent)}
+/* Pastille toujours présente : l'étiquette garde sa largeur quand elle s'allume (sinon elle glisse sous le curseur et clignote). */
+.c-maquette-territoire .mt-etiquette::before{content:""; width:6px; height:6px; border-radius:50%; flex:none; background:color-mix(in srgb,var(--signal) 55%,var(--surface)); transition:background-color 200ms, box-shadow 200ms}
+.c-maquette-territoire .mt-etiquette.est-active{border-color:var(--signal); box-shadow:0 0 0 1px var(--signal),0 8px 20px -8px color-mix(in srgb,#000 70%,transparent)}
+.c-maquette-territoire .mt-etiquette.est-active::before{background:var(--signal); box-shadow:0 0 6px var(--signal)}
+
+/* ---------- le panneau : points d'attache, liste (vrais boutons), phrase ---------- */
+.c-maquette-territoire .mt-panneau{
+  position:relative; z-index:2; padding:20px 18px 16px; border-radius:14px;
+  background:var(--surface); border:1px solid color-mix(in srgb,var(--encre) 13%,transparent);
+  box-shadow:0 24px 60px -32px color-mix(in srgb,#000 70%,transparent);
+}
+.c-maquette-territoire .mt-legende{margin:0; font-family:var(--police-repere); font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; line-height:1.6; color:var(--encre-douce)}
+.c-maquette-territoire .mt-legende + .mt-liste,.c-maquette-territoire .mt-legende + .mt-bases{margin-top:10px}
+.c-maquette-territoire .mt-bases{display:grid; gap:6px; margin:0 0 16px; padding:0; list-style:none}
+.c-maquette-territoire .mt-base{display:flex; align-items:center; flex-wrap:wrap; gap:2px 10px; min-height:28px; font-weight:700; font-size:16px; line-height:1.25}
+.c-maquette-territoire .mt-base::before{
+  content:""; width:10px; height:10px; border-radius:50%; background:var(--accent); flex:none;
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent);
+}
+.c-maquette-territoire .mt-base-role{font-family:var(--police-repere); font-size:11px; font-weight:400; letter-spacing:.06em; text-transform:uppercase; color:var(--encre-douce)}
+.c-maquette-territoire .mt-liste{display:flex; flex-wrap:wrap; gap:7px; margin:0; padding:0; list-style:none}
+.c-maquette-territoire .mt-lieu{
+  display:inline-flex; align-items:center; gap:8px; min-height:40px; padding:0 13px; margin:0;
+  font:inherit; font-size:15px; font-weight:600; line-height:1.2; color:var(--encre); cursor:pointer;
+  background:transparent; border:1px solid color-mix(in srgb,var(--encre) 46%,transparent); border-radius:999px; /* contour ≥ 3:1 (WCAG 1.4.11) */
+  transition:border-color 200ms, background-color 200ms, color 200ms;
+}
+.c-maquette-territoire .mt-lieu::before{
+  content:""; width:7px; height:7px; border-radius:50%; flex:none;
+  background:color-mix(in srgb,var(--encre) 30%,transparent); transition:background-color 200ms, box-shadow 200ms;
+}
+.c-maquette-territoire .mt-lieu:hover,.c-maquette-territoire .mt-lieu.est-active{border-color:var(--accent)}
+.c-maquette-territoire .mt-lieu.est-active::before{background:var(--signal); box-shadow:0 0 8px var(--signal)}
+.c-maquette-territoire .mt-lieu[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--sur-accent)}
+.c-maquette-territoire .mt-lieu[aria-pressed="true"]::before{background:var(--sur-accent); box-shadow:none}
+.c-maquette-territoire .mt-lieu:disabled{cursor:not-allowed; opacity:.6}
+.c-maquette-territoire .mt-lieu:focus-visible{outline:2px solid var(--focus,var(--accent)); outline-offset:3px}
+
+.c-maquette-territoire .mt-phrase{
+  margin:16px 0 0; padding-top:14px; min-height:5.6em;
+  border-top:1px solid color-mix(in srgb,var(--encre) 14%,transparent);
+  font-size:16.5px; line-height:1.5; color:var(--encre-douce); text-wrap:pretty;
+}
+.c-maquette-territoire .mt-p-nom{font-family:var(--police-titre); font-weight:700; color:var(--encre)}
+.c-maquette-territoire .mt-p-km{font-family:var(--police-repere); font-weight:700; color:var(--accent); white-space:nowrap; font-variant-numeric:tabular-nums}
+.c-maquette-territoire .mt-p-n{display:inline-block; min-width:1ch; text-align:right}
+.c-maquette-territoire .mt-annonce{position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0}
+.c-maquette-territoire .mt-note{margin:12px 0 0; font-family:var(--police-repere); font-size:12px; line-height:1.6; color:var(--encre-douce)}
+
+/* ---------- large : le panneau flotte à droite de la maquette ---------- */
+@container (min-width:960px){
+  .c-maquette-territoire .mt-cadre{grid-template:minmax(0,1fr) / minmax(0,1fr)}
+  .c-maquette-territoire .mt-scene,.c-maquette-territoire .mt-panneau{grid-area:1/1}
+  .c-maquette-territoire .mt-scene{height:clamp(600px,52cqi,720px)}
+  .c-maquette-territoire .mt-repli{background-position:8% 50%; background-size:auto 78%}
+  .c-maquette-territoire .mt-panneau{justify-self:end; align-self:center; width:min(380px,33cqi); margin:24px; padding:24px 22px 18px}
+}
+/* Petit écran : la maquette entière, un peu moins haute que large. */
+@container (max-width:520px){
+  .c-maquette-territoire .mt-scene{height:clamp(290px,86cqi,440px); border-radius:14px}
+  .c-maquette-territoire .mt-etiquette{font-size:11.5px; padding:2px 8px 3px}
+  .c-maquette-territoire .mt-e-role{display:none}
+  .c-maquette-territoire .mt-panneau{padding:18px 14px 14px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .c-maquette-territoire .mt-repli{animation-duration:1ms}
+  .c-maquette-territoire .mt-toile,.c-maquette-territoire .mt-lieu,.c-maquette-territoire .mt-lieu::before,.c-maquette-territoire .mt-etiquette,.c-maquette-territoire .mt-fil{transition:none}
+}
