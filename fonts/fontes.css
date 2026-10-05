@@ -1,0 +1,37 @@
+/* Polices auto-hébergées — Golfe Services Plomberie
+   Clash Display (titres) + Satoshi (texte). Aucun CDN : seul le woff2 local est servi,
+   conforme à la CSP font-src 'self'. Fontshare / Indian Type Foundry, licence gratuite. */
+
+/* ---- Clash Display ---- */
+@font-face{
+  font-family:'Clash Display';
+  src:url('JTSL5QESUXATU47LCPUNHZQBDDIWDOSW.woff2') format('woff2');
+  font-weight:500;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Clash Display';
+  src:url('Z3MGHFHX6DCTLQ55LJYRJ5MDCZPMFZU6.woff2') format('woff2');
+  font-weight:600;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Clash Display';
+  src:url('53RZKGODFYDW3QHTIL7IPOWTBCSUEZK7.woff2') format('woff2');
+  font-weight:700;font-style:normal;font-display:swap;
+}
+
+/* ---- Satoshi ---- */
+@font-face{
+  font-family:'Satoshi';
+  src:url('KFIAZD4RUMEZIYV6FQ3T3GP5PDBDB6JY.woff2') format('woff2');
+  font-weight:400;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Satoshi';
+  src:url('7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.woff2') format('woff2');
+  font-weight:500;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Satoshi';
+  src:url('GHM6WVH6MILNYOOCXHXB5GTSGNTMGXZR.woff2') format('woff2');
+  font-weight:700;font-style:normal;font-display:swap;
+}
